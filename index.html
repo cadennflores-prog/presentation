@@ -2,93 +2,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biology Report: Coniferous Studies</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #f4f7f6; }
-        
-        /* THE MASK STYLE (Boring School Project) */
-        #schoolProject { padding: 40px; color: #2c3e50; transition: 0.5s; }
-        .header { border-bottom: 2px solid #27ae60; padding-bottom: 10px; }
-        .tree-container { text-align: center; margin: 30px 0; }
-        
-        /* THE GATE (Hidden inside the mask) */
-        .login-box { 
-            background: #fff; border: 1px solid #ddd; padding: 15px; 
-            border-radius: 8px; width: 250px; margin: 20px auto; text-align: center;
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            background: #f4f7f6; 
+            color: #2c3e50;
+            line-height: 1.6;
         }
-        input { width: 80%; padding: 8px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
-        .unlock-btn { background: #27ae60; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; }
-
-        /* THE ACTUAL LAB (Hidden by default) */
-        #hiddenLab { display: none; padding: 30px; background: #0d1117; color: #c9d1d9; min-height: 100vh; }
-        .module { background: #161b22; border: 1px solid #30363d; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        textarea { width: 100%; height: 150px; background: #0d1117; color: #00ff00; border: 1px solid #30363d; font-family: monospace; }
+        .container { padding: 40px; max-width: 800px; margin: auto; }
+        .header { border-bottom: 2px solid #27ae60; padding-bottom: 10px; margin-bottom: 20px; }
+        .tree-icon { text-align: center; font-size: 80px; margin: 20px 0; }
+        
+        /* THE MASK BOX */
+        .submission-box { 
+            background: #fff; 
+            border: 1px solid #ddd; 
+            padding: 20px; 
+            border-radius: 8px; 
+            text-align: center; 
+            margin-top: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        input { 
+            width: 70%; 
+            padding: 10px; 
+            margin: 15px 0; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            font-family: monospace;
+        }
+        
+        .btn { 
+            background: #27ae60; 
+            color: white; 
+            border: none; 
+            padding: 12px 25px; 
+            cursor: pointer; 
+            border-radius: 4px; 
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #219150; }
+        
+        #status { font-size: 11px; color: #7f8c8d; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <div id="schoolProject">
+    <div class="container">
         <div class="header">
-            <h1>Analysis of *Abies balsamea* (Balsam Fir)</h1>
-            <p>Student ID: 047-B | Date: May 2026</p>
+            <h1>Analysis of *Abies balsamea*</h1>
+            <p><strong>Subject:</strong> Botany & Environmental Science | <strong>ID:</strong> 047-B</p>
         </div>
+
+        <p>The <em>Abies balsamea</em>, commonly known as the Balsam Fir, is a North American fir, native to most of eastern and central Canada and the northeastern United States.</p>
         
-        <div class="tree-container">
-            <span style="font-size: 100px;">🎄</span>
-            <p><em>Fig 1.1: Schematic representation of a high-altitude conifer.</em></p>
-        </div>
+        <div class="tree-icon">🎄</div>
 
-        <p>This report explores the cellular structure and growth patterns of evergreen trees during the winter solstice. The needle morphology allows for photosynthesis even in sub-zero temperatures...</p>
+        <p>This research module examines the resinous bark and needle longevity of high-latitude conifers. Data is collected via remote sensors and uploaded to the centralized peer-review database below.</p>
 
-        <div class="login-box">
-            <p style="font-size: 12px; font-weight: bold;">Submit Data for Peer Review</p>
-            <input type="password" id="accessCode" placeholder="Access Token">
-            <button class="unlock-btn" onclick="checkAuth()">SUBMIT</button>
-        </div>
-    </div>
-
-    <div id="hiddenLab">
-        <h2 style="color: #58a6ff;">SYSTEM_OVERRIDE: Research Node 047</h2>
-        <hr style="border: 0; border-top: 1px solid #30363d;">
-
-        <div class="module">
-            <h3>📑 PERSISTENT IDEA BOOK</h3>
-            <textarea id="ideaBox" placeholder="Type secret updates here..."></textarea>
-            <button onclick="saveData()" style="margin-top:10px; cursor:pointer;">SAVE TO ENCRYPTED NODE</button>
-        </div>
-
-        <div class="module">
-            <h3>🌍 EXTERNAL UPLINKS</h3>
-            <button onclick="window.open('https://science.nasa.gov/earth-science/oceanography/', '_blank')">NASA OCEAN DATA</button>
-            <button onclick="window.open('https://now.gg/apps/roblox-corporation/5349/roblox.html', '_blank')" style="background:#e67e22; color:white; border:none; padding:5px 10px; cursor:pointer;">REMOTE SIMULATOR (Hytale/Roblox)</button>
+        <div class="submission-box">
+            <h3 style="margin-top:0;">Student Submission Portal</h3>
+            <p style="font-size: 12px;">Enter your 8-digit Peer Review Token to sync research data.</p>
+            
+            <input type="password" id="accessCode" placeholder="Token ID">
+            <br>
+            <button class="btn" onclick="checkAuth()">SUBMIT DATA</button>
+            <p id="status">Status: Waiting for input...</p>
         </div>
     </div>
 
     <script>
-        // PASSWORD LOGIC
         function checkAuth() {
             const code = document.getElementById('accessCode').value;
-            // Your Secret Code
-            if (code === "2014") {
-                document.getElementById('schoolProject').style.display = "none";
-                document.getElementById('hiddenLab').style.display = "block";
-                document.body.style.background = "#0d1117";
+            const status = document.getElementById('status');
+            
+            // THE PASSWORD
+            if (code === "tree77") {
+                status.innerText = "AUTHENTICATED. REDIRECTING...";
+                status.style.color = "#27ae60";
+                
+                // REDIRECTS TO YOUR LAB FROM THE PHOTO
+                // This URL matches the one visible in your browser tab
+                window.location.href = 'https://web-zeta-six-92.vercel.app/';
+                
             } else {
-                alert("Submission Pending: Peer Review token invalid.");
+                // Fake error to stay in character
+                status.innerText = "ERROR: Token not recognized in local database.";
+                status.style.color = "#c0392b";
+                document.getElementById('accessCode').value = "";
             }
         }
 
-        // SAVE LOGIC
-        function saveData() {
-            localStorage.setItem('secret_notes', document.getElementById('ideaBox').value);
-            alert("Notes saved to browser memory.");
-        }
-
-        // LOAD LOGIC
-        window.onload = function() {
-            const saved = localStorage.getItem('secret_notes');
-            if (saved) document.getElementById('ideaBox').value = saved;
-        }
+        // Allow pressing "Enter" to submit
+        document.getElementById('accessCode').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkAuth();
+            }
+        });
     </script>
 </body>
 </html>

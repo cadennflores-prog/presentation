@@ -6,7 +6,7 @@
     <title>Biology Report: Coniferous Studies</title>
     <style>
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: 'Segoe UI', sans-serif; 
             margin: 0; 
             background: #f4f7f6; 
             color: #2c3e50;
@@ -14,65 +14,71 @@
         }
         .container { padding: 40px; max-width: 800px; margin: auto; }
         .header { border-bottom: 2px solid #27ae60; padding-bottom: 10px; margin-bottom: 20px; }
-        .tree-icon { text-align: center; font-size: 80px; margin: 20px 0; }
         
-        /* THE MASK BOX */
+        /* The Christmas Tree Visual */
+        .tree-icon { text-align: center; font-size: 100px; margin: 20px 0; cursor: default; }
+        
+        /* The Secret Submission Box */
         .submission-box { 
             background: #fff; 
             border: 1px solid #ddd; 
-            padding: 20px; 
-            border-radius: 8px; 
+            padding: 25px; 
+            border-radius: 12px; 
             text-align: center; 
             margin-top: 40px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
         
         input { 
-            width: 70%; 
-            padding: 10px; 
+            width: 80%; 
+            padding: 12px; 
             margin: 15px 0; 
-            border: 1px solid #ccc; 
-            border-radius: 4px; 
+            border: 2px solid #eee; 
+            border-radius: 6px; 
             font-family: monospace;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
         }
+        input:focus { border-color: #27ae60; }
         
         .btn { 
             background: #27ae60; 
             color: white; 
             border: none; 
-            padding: 12px 25px; 
+            padding: 12px 30px; 
             cursor: pointer; 
-            border-radius: 4px; 
+            border-radius: 6px; 
             font-weight: bold;
-            transition: 0.3s;
+            font-size: 14px;
+            text-transform: uppercase;
         }
-        .btn:hover { background: #219150; }
         
-        #status { font-size: 11px; color: #7f8c8d; margin-top: 10px; }
+        #status { font-size: 12px; margin-top: 15px; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="header">
-            <h1>Analysis of *Abies balsamea*</h1>
-            <p><strong>Subject:</strong> Botany & Environmental Science | <strong>ID:</strong> 047-B</p>
+            <h1>Botanical Analysis: *Abies balsamea*</h1>
+            <p><strong>Research Node:</strong> 047-B | <strong>Status:</strong> Final Review</p>
         </div>
 
-        <p>The <em>Abies balsamea</em>, commonly known as the Balsam Fir, is a North American fir, native to most of eastern and central Canada and the northeastern United States.</p>
+        <p>This study documents the metabolic rates of conifers during winter cycles. The *Abies balsamea* (Balsam Fir) serves as a primary indicator for ecosystem health in high-latitude climates.</p>
         
         <div class="tree-icon">🎄</div>
 
-        <p>This research module examines the resinous bark and needle longevity of high-latitude conifers. Data is collected via remote sensors and uploaded to the centralized peer-review database below.</p>
+        <p>Field data collected via remote satellite telemetry is encrypted. To access the raw data logs and interactive simulation modules, enter your authorized Peer Review Token below.</p>
 
         <div class="submission-box">
-            <h3 style="margin-top:0;">Student Submission Portal</h3>
-            <p style="font-size: 12px;">Enter your 8-digit Peer Review Token to sync research data.</p>
+            <h3 style="margin-top:0; color:#27ae60;">Data Submission Portal</h3>
+            <p style="color:#7f8c8d; font-size:12px;">Authentication Required for Database Decryption</p>
             
-            <input type="password" id="accessCode" placeholder="Token ID">
+            <input type="password" id="accessCode" placeholder="Enter Token ID">
             <br>
-            <button class="btn" onclick="checkAuth()">SUBMIT DATA</button>
-            <p id="status">Status: Waiting for input...</p>
+            <button class="btn" onclick="checkAuth()">Submit to Database</button>
+            <div id="status" style="color: #95a5a6;">SYSTEM: Awaiting credentials...</div>
         </div>
     </div>
 
@@ -81,24 +87,25 @@
             const code = document.getElementById('accessCode').value;
             const status = document.getElementById('status');
             
-            // THE PASSWORD
-            if (code === "tree77") {
-                status.innerText = "AUTHENTICATED. REDIRECTING...";
+            // YOUR SECRET CODE (Change this if you want!)
+            if (code === "2014") {
+                status.innerText = "AUTHENTICATION SUCCESSFUL. REDIRECTING...";
                 status.style.color = "#27ae60";
                 
-                // REDIRECTS TO YOUR LAB FROM THE PHOTO
-                // This URL matches the one visible in your browser tab
-                window.location.href = 'https://web-zeta-six-92.vercel.app/';
+                // Redirection to your site from the photo
+                setTimeout(() => {
+                    window.location.href = 'https://web-zeta-six-92.vercel.app/';
+                }, 800);
                 
             } else {
-                // Fake error to stay in character
-                status.innerText = "ERROR: Token not recognized in local database.";
+                // Professional sounding error
+                status.innerText = "ERROR 403: Invalid Token. Attempt logged.";
                 status.style.color = "#c0392b";
                 document.getElementById('accessCode').value = "";
             }
         }
 
-        // Allow pressing "Enter" to submit
+        // Let's you hit "Enter" on the keyboard to submit
         document.getElementById('accessCode').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 checkAuth();

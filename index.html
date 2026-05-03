@@ -5,24 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biology Report: Coniferous Studies</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; color: #2c3e50; line-height: 1.6; margin: 0; }
-        .container { padding: 40px; max-width: 700px; margin: auto; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            margin: 0; 
+            background: #f4f7f6; 
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        .container { padding: 40px; max-width: 750px; margin: auto; }
         .header { border-bottom: 2px solid #27ae60; padding-bottom: 10px; margin-bottom: 20px; }
-        .tree-icon { text-align: center; font-size: 100px; margin: 20px 0; }
+        .tree-icon { text-align: center; font-size: 90px; margin: 20px 0; }
+        
+        /* The Secret Portal Box */
         .submission-box { 
-            background: #fff; border: 1px solid #ddd; padding: 25px; 
-            border-radius: 12px; text-align: center; margin-top: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: #fff; 
+            border: 1px solid #ddd; 
+            padding: 25px; 
+            border-radius: 12px; 
+            text-align: center; 
+            margin-top: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
+        
         input { 
-            width: 80%; padding: 12px; margin: 15px 0; border: 2px solid #eee; 
-            border-radius: 6px; text-align: center; font-size: 16px; outline: none;
+            width: 80%; 
+            padding: 12px; 
+            margin: 15px 0; 
+            border: 2px solid #eee; 
+            border-radius: 6px; 
+            text-align: center;
+            font-size: 16px;
+            outline: none;
         }
+        input:focus { border-color: #27ae60; }
+        
         .btn { 
-            background: #27ae60; color: white; border: none; padding: 12px 30px; 
-            cursor: pointer; border-radius: 6px; font-weight: bold; width: 100%;
+            background: #27ae60; 
+            color: white; 
+            border: none; 
+            padding: 12px 30px; 
+            cursor: pointer; 
+            border-radius: 6px; 
+            font-weight: bold;
+            width: 100%;
+            transition: 0.2s;
         }
-        #status { font-size: 12px; margin-top: 15px; color: #7f8c8d; }
+        .btn:hover { background: #219150; }
+        
+        #status { font-size: 12px; margin-top: 15px; color: #7f8c8d; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -30,20 +60,22 @@
     <div class="container">
         <div class="header">
             <h1>Botanical Analysis: *Abies balsamea*</h1>
-            <p><strong>Research Node:</strong> 047-B | <strong>Status:</strong> Final Review</p>
+            <p><strong>Department:</strong> Environmental Science | <strong>ID:</strong> 047-B</p>
         </div>
 
-        <p>This study documents the metabolic rates of conifers during winter cycles. The Balsam Fir serves as a primary indicator for ecosystem health.</p>
+        <p>This research module examines the cellular structure and resin production of the Balsam Fir during sub-zero temperature cycles.</p>
         
         <div class="tree-icon">🎄</div>
 
+        <p>Local data logs are currently encrypted for peer review. Authorized researchers must enter their assigned Token ID to decrypt the simulation modules.</p>
+
         <div class="submission-box">
-            <h3 style="margin-top:0; color:#27ae60;">Student Submission Portal</h3>
-            <p style="font-size:12px;">Enter Peer Review Token to decrypt data logs.</p>
+            <h3 style="margin-top:0; color:#27ae60;">Database Login</h3>
+            <p style="font-size:12px; color:#95a5a6;">Enter Authorization Token</p>
             
             <input type="password" id="accessCode" placeholder="Token ID">
             <button class="btn" onclick="checkAuth()">SUBMIT TO DATABASE</button>
-            <div id="status">SYSTEM: Awaiting credentials...</div>
+            <div id="status">STATUS: Waiting for credentials...</div>
         </div>
     </div>
 
@@ -54,22 +86,29 @@
             
             // THE PASSWORD
             if (code === "2014") {
-                status.innerText = "AUTHENTICATED. REDIRECTING...";
+                status.innerText = "AUTHENTICATED. PREPARING REDIRECT...";
                 status.style.color = "#27ae60";
                 
-                // THIS IS THE LINK FROM YOUR PHOTO
-                window.location.href = 'https://my-mc-launcher.my.canva.site/dev';
+                // This creates the "Passport" so your other site knows you're allowed
+                sessionStorage.setItem('allowed_in', 'true');
+                
+                // Redirects to your main Canva site
+                setTimeout(() => {
+                    window.location.href = 'https://my-mc-launcher.my.canva.site/dev';
+                }, 1000);
                 
             } else {
-                status.innerText = "ERROR: Token not recognized. Attempt logged.";
+                status.innerText = "ERROR: Token not recognized. Access denied.";
                 status.style.color = "#c0392b";
                 document.getElementById('accessCode').value = "";
             }
         }
 
-        // Press "Enter" to submit
+        // Allow pressing "Enter" on keyboard
         document.getElementById('accessCode').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') { checkAuth(); }
+            if (e.key === 'Enter') {
+                checkAuth();
+            }
         });
     </script>
 </body>
